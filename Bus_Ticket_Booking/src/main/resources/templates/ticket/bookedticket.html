@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <title>ticket History</title>
+  <style>
+
+    *{
+  padding: 0;
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.container span
+{
+  font-size: 2em;
+  font-weight: bolder;
+}
+.container button
+{
+  padding: 8px 28px;
+  background-color: white;
+  color: black;
+  border-radius: 12px;
+  border: none;
+  font-weight: bolder;
+}
+.container button:hover
+{
+  background-color: rgb(233, 227, 227);
+}
+main
+{
+  margin-top: 100px;
+}
+.username
+{
+  margin-left: 100px;
+  display: flex;
+  justify-content: space-between;
+
+}
+.username a
+{
+  margin-right: 200px;
+  background-color: red;
+  padding: 10px;
+  background-color: #1976D2;
+  color: white !important;
+  text-decoration:none;
+  font-size: 1.5em;
+  font-weight: bold;
+  border-radius: 12px;
+}
+.username a:hover
+{
+    background-color: rgb(214, 209, 209) !important;
+  color: black !important;
+}
+input
+{
+  text-transform: uppercase;
+}
+.username h2
+{
+  color:  #1976D2;
+  font-weight: bold;
+  text-decoration:underline;
+
+}
+
+.search
+{
+  /* max-width: 90%; */
+  /* margin-left: 200px; */
+  /* margin-top: 50px; */
+   padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 900px;
+
+}
+.searchfrom
+{
+  margin-right: 50px;
+  max-width: 500px;
+}
+
+.search label
+{
+  margin-left: 5px;
+  font-weight: bold;
+}
+.shadow
+{
+  max-width: 800px;
+  margin:50px auto;
+  align-items: center;
+  display: flex;
+  border-radius: 12px;
+
+}
+
+.searchbutton
+{
+  background-color: red !important;
+  margin-top: 23px;
+  padding: 8px 50px !important;
+  color: white !important;
+}
+.searchbutton:hover
+{
+  background-color: rgb(214, 209, 209) !important;
+  color: black !important;
+}
+
+.busdiaplay
+{
+  max-width: 94%;
+  padding: 10px;
+  margin-left: 40px;
+  margin-top: 100px;
+}
+.busdiaplay h4
+{
+  font-weight: bolder;
+  font-size: 1.8em;
+  text-decoration: underline;
+  color: rgb(2, 71, 68);
+}
+.busdiaplay h4
+{
+  text-align: left;
+}
+.shadow {
+  margin: 50px auto;
+  align-items: center;
+  /* display: flex; */
+  border-radius: 12px;
+}
+.tablehead tr th
+{
+  background-color: #1976D2 !important;
+  color: white !important;
+  font-weight: bolder;
+}
+
+.bookbutton
+{
+  text-decoration: none;
+  background-color: green;
+  padding: 8px 19px;
+}
+.bookbutton:hover
+{
+  background-color: #288df2 !important;
+}
+
+    .Deletebutton
+{
+    background-color: rgb(166, 5, 5);
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  border-radius:12px;
+  margin: 10px 0;
+}
+.Deletebutton:hover
+{
+  background-color: rgb(205, 60, 60);
+  color: black;
+}
+  </style>
+</head>
+<body>
+<nav class="logo navbar navbar-dark mb-4 bg-primary fixed-top ">
+  <div class="container">
+    <span class="text-white mb-0 navbar-brand">SRI BUS</span>
+    <form th:action="@{/logout}" method="post">
+      <button type="submit" class="btn btn-info">Logout</button>
+    </form>
+  </div>
+</nav>
+<div class="card busdiaplay">
+  <div class="card-body">
+    <h4 class="card-title mb-4">Booket Ticket</h4>
+
+    <div>
+      <table class="table table-bordered table-hover text-center align-middle">
+        <thead class="bg-primary tablehead">
+        <tr class="bg-primary">
+          <th>Bus Company</th>
+          <th>Bus Name</th>
+          <th>Bus Number</th>
+          <th>Date</th>
+          <th >Starting Point</th>
+          <th>Time</th>
+          <th>Destination Point</th>
+          <th>Time</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+<!--        <tr th:each="tic : ${tickets}">-->
+            <tr>
+          <td th:text="${ticket.busProvider.name}"></td>
+          <td th:text="${ticket.buses.busName} "></td>
+          <td th:text="${ticket.buses.busNumber} "></td>
+          <td th:text="${ticket.BookedDate}"></td>
+          <td th:text="${ticket.buses.startingPoint} "></td>
+          <td th:text="${ticket.buses.startTime}"></td>
+          <td th:text="${ticket.buses.destinationPoint} "></td>
+          <td th:text="${ticket.buses.destinationTime}"></td>
+          <td th:text="${ticket.buses.price}"></td>
+              <td>
+                <a th:href="@{'/passenger/delete/' + ${ticket.id}}" class="Deletebutton">Delete</a>
+              </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+</main>
+
+</body>
+</html>

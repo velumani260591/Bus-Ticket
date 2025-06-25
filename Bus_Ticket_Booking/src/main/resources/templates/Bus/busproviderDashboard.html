@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <style>
+        *{
+  padding: 0;
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.container span
+{
+  font-size: 2em;
+  font-weight: bolder;
+}
+.container button
+{
+  padding: 8px 28px;
+  background-color: white;
+  color: black;
+  border-radius: 12px;
+  border: none;
+  font-weight: bolder;
+}
+.container button:hover
+{
+  background-color: rgb(233, 227, 227);
+}
+
+.buscompanyname
+{
+  margin-left: 50px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+.buscompanyname h2
+{
+  color:#1976D2;
+  font-weight: bolder;
+  font-size: 2.5em;
+  text-decoration: underline;
+}
+.table
+{
+  text-align: center;
+  font-size: 1.2em;
+
+}
+.table th
+{
+  background-color: #2485e6 !important;
+  color: white;
+}
+
+.card
+{
+  max-width: 90%;
+  margin-left: 100px;
+}
+.card-title h2
+{
+  font: size 2em;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 20px;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color:#1976D2 ;
+  color: #1976D2;
+}
+
+.updatebutton
+{
+  background-color: rgb(166, 110, 5);
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  border-radius:12px;
+  margin: 10px 20px;
+}
+.updatebutton:hover
+{
+  background-color: rgb(219, 172, 85);
+  color: black;
+}
+
+.Deletebutton
+{
+    background-color: rgb(166, 5, 5);
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  border-radius:12px;
+  margin: 10px 0;
+}
+.Deletebutton:hover
+{
+  background-color: rgb(205, 60, 60);
+  color: black;
+}
+.ViewButton
+{
+  background-color: rgb(85, 138, 237);
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  border-radius:12px;
+  margin: 10px 20px;
+}
+.ViewButton:hover
+{
+  background-color: #77b1ec;
+  color: black;
+}
+.addbus
+{
+  margin-right: 200px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  /* color: black; */
+  font-weight: bolder;
+}
+    </style>
+    <title>Bus Dashboard</title>
+</head>
+<body>
+<header class=" my-5">
+    <nav class="logo navbar navbar-dark mb-4 bg-primary fixed-top ">
+        <div class="container">
+            <span class="text-white mb-0">SRI BUS</span>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-info">Logout</button>
+            </form>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="buscompanyname">
+        <h2 th:text="${busprovder.name}" class="text-uppercase">Lakshmi</h2>
+        <a th:href="@{/busProvider/addbus}" class="addbus btn btn-success">Add bus</a>
+    </div>
+
+    <div class="card shadow my-5">
+        <div class="card-body">
+            <div class="card-title">
+                <h2>YOUR BUSES</h2>
+            </div>
+            <table class="table table-bordered ">
+                <thead class="bg-primary">
+                <tr class="bg-primary">
+                    <th>Bus Name</th>
+                    <th>Bus Number</th>
+                    <th >Starting Point</th>
+                    <th>Time</th>
+                    <th>Destination Point</th>
+                    <th>Time</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="bus:${buses}">
+                    <td th:text="${bus.busName}">Sri</td>
+                    <td th:text="${bus.busNumber}">xyz-1234</td>
+                    <td th:text="${bus.startingPoint}">chennai </td>
+                    <td th:text="${bus.startTime}">16:00 </td>
+                    <td th:text="${bus.destinationPoint}">Salem</td>
+                    <td th:text="${bus.destinationTime}">23:00</td>
+                    <td th:text="${bus.price}">600</td>
+                    <td>
+                        <a th:href="@{'/busProvider/upadteTheBusData/' + ${bus.id} }" class="updatebutton">Update</a>
+                        <a th:href="@{'/busProvider/deleteTheBus/' + ${bus.id} }" class="Deletebutton">Delete</a>
+                        <a th:href="@{'/busProvider/viewBusTickets/' + ${bus.id} }" class="ViewButton ">View</a>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <style>
+        *{
+  padding: 0;
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.container span
+{
+  font-size: 2em;
+  font-weight: bolder;
+}
+.container button
+{
+  padding: 8px 28px;
+  background-color: white;
+  color: black;
+  border-radius: 12px;
+  border: none;
+  font-weight: bolder;
+}
+.container button:hover
+{
+  background-color: rgb(233, 227, 227);
+}
+
+.addbusstyle
+{
+  margin-top: 100px;
+  /* text-align: center; */
+  max-width: 600px;
+}
+.name
+{
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+  color:#1787f7;
+}
+.formbussadder
+{
+  margin-left: 15px;
+  max-width: 580px;
+  padding: 0 20px;
+}
+
+.formbussadder label
+{
+  font-weight: bolder ;
+  font-size: 1.3em;
+  margin-left: 5px;
+}
+.formbussadder input
+{
+  background-color: rgb(241, 241, 241);
+  color: black;
+}
+.saubmitbutton
+{
+  /* margin-left: 180px; */
+  margin-top: 12px;
+  margin-bottom: 20px;
+  background-color: #1787f7 !important;
+  padding: 8px 18px !important;
+  color: whitesmoke !important;
+
+}
+.saubmitbutton:hover
+{
+    background-color: #6baff3 !important;
+}
+.backbuttom
+{
+  border-radius: 12px;
+}
+    </style>
+    <title>Update Bus</title>
+</head>
+<body>
+<header class=" my-5">
+    <nav class="logo navbar navbar-dark mb-4 bg-primary fixed-top ">
+        <div class="container">
+            <span class="text-white mb-0">SRI BUS</span>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-info">Logout</button>
+            </form>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container  addbusstyle">
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="card-title name mb-4">New Bus Details</h2>
+            </div>
+
+            <div class="formbussadder">
+                <form  th:object="${oldbus}"  th:action="@{/busProvider/savetheupdatebus}" method="post"  >
+                        <input type="hidden" th:field="*{id}">
+                    <div class="mb-3">
+                        <label for="BusName" class="form-label">Bus Name</label>
+                        <input th:field="*{busName}" type="text" class="form-control" name="BusName" id="BusName"  placeholder="Enter your Bus Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="BusNumber" class="form-label">Bus Number</label>
+                        <input th:field="*{busNumber}" type="text" class="form-control" name="BusNumber" id="BusNumber"  placeholder="Enter your BusNumber">
+                    </div>
+                    <div class="mb-3">
+                        <label for="startingPoint" class="form-label">Starting Point</label>
+                        <input  th:field="*{startingPoint}" type="text" class="form-control" name="startingPoint" id="startingPoint" placeholder="Enter the Starting Point">
+                    </div>
+                    <div class="mb-3">
+                        <label for="startTime" class="form-label">Starting Time</label>
+                        <input  th:field="*{startTime}" type="text" class="form-control" name="startTime" id="startTime" placeholder="Enter Starting  Time">
+                    </div>
+                    <div class="mb-3">
+                        <label for="destinationPoint" class="form-label">Destination Point</label>
+                        <input  th:field="*{destinationPoint}" type="text" class="form-control" name="destinationPoint" id="destinationPoint" placeholder="Enter the Destination Point">
+                    </div>
+                    <div class="mb-3">
+                        <label for="destinationTime" class="form-label">DestinationTime</label>
+                        <input  th:field="*{destinationTime}" type="text" class="form-control" name="destinationTime" id="destinationTime" placeholder="Enter Destination  Time">
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input th:field="*{price}" type="text" class="form-control" name="price" id="price" placeholder="Enter the trip price">
+                    </div>
+                    <button type="submit" class="saubmitbutton w-100" >SUBMIT</button>
+                    <a th:href="@{/busProvider/dashboard}" class="backbuttom mb-4 btn btn-warning w-100" >Back</a>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+</body>
+</html>
